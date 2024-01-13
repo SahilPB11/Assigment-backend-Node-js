@@ -5,14 +5,26 @@ import {
   getProducts,
   updateProduct,
   deleteProduct,
-  searchProducts,
   getProductById,
+  searchProducts,
 } from "../controller/productController.js";
 
 // Initialize the Express router
 const router = express.Router();
 
 // Define routes for managing products
+
+// Route to search products by name, description, or variant name
+// GET /api/products/search
+router.get(
+  "/products/search/",
+  (req, res, next) => {
+    // Your code here
+    console.log("dff");
+    next();
+  },
+  searchProducts
+);
 
 // Route to create a new product
 // POST /api/products
@@ -32,10 +44,6 @@ router.put("/products/:id", updateProduct);
 // Route to delete a product by ID
 // DELETE /api/products/:id
 router.delete("/products/:id", deleteProduct);
-
-// Route to search products by name, description, or variant name
-// GET /api/products/search
-router.get("/products/search", searchProducts);
 
 // Export the router to be used in other parts of the application
 export default router;

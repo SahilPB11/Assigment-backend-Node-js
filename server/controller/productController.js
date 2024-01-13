@@ -21,7 +21,7 @@ export const createProduct = async (req, res, next) => {
 };
 
 // Get all products
-export const getProducts = async (req, res) => {
+export const getProducts = async (req, res, next) => {
   try {
     const products = await Product.find();
     res.status(200).json(products);
@@ -31,7 +31,7 @@ export const getProducts = async (req, res) => {
 };
 
 // Retrieve a single product by ID with embedded variants
-export const getProductById = async (req, res) => {
+export const getProductById = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) {
@@ -46,7 +46,7 @@ export const getProductById = async (req, res) => {
 };
 
 // Update a product by ID
-export const updateProduct = async (req, res) => {
+export const updateProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -63,7 +63,7 @@ export const updateProduct = async (req, res) => {
 };
 
 // Delete a product by ID
-export const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
     if (!product) {
@@ -80,9 +80,18 @@ export const deleteProduct = async (req, res) => {
 };
 
 // Search products by name, description, or variant name
-export const searchProducts = async (req, res) => {
+export const searchProducts = async (req, res, next) => {
   try {
+    console.log("dokg");
     const query = req.query.query;
+    // Log the query for debugging
+    console.log("Search Query:", query);
+    // Ensure the query is a valid string before executing the search
+    if (typeof query !== "string") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid search query." });
+    }
     const products = await Product.find({
       $or: [
         { name: { $regex: query, $options: "i" } }, // Search by product name
@@ -92,6 +101,7 @@ export const searchProducts = async (req, res) => {
     });
     res.status(200).json(products);
   } catch (error) {
+    console.log("hii");
     next(new ErrorHandler(error.message, 500));
   }
 };
