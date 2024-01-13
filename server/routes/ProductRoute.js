@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-router.post("/products");
+// cretaed  function to create a product
+router.post("/products", savedProduct);
 
 module.exports = router;
