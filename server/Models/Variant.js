@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const variantSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -7,5 +7,5 @@ const variantSchema = new mongoose.Schema({
   stockCount: { type: Number, required: true },
 });
 
-const Varient = mongoose.model("Variant", variantSchema);
-export default Varient;
+const Variant = mongoose.model("Variant", variantSchema);
+export default Variant;
