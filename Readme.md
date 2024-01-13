@@ -1,6 +1,6 @@
 **Live Link:** https://backend-assignment-bmjb.onrender.com/
 
-**Postman Documentation:** https://www.getpostman.com/collections/68bca6e1a82614627656
+**Postman Documentation:** [https://documenter.getpostman.com/view/23487917/2s9YsNdVnd)
 
 **About the API:**
 
