@@ -2,7 +2,7 @@
 import express from "express";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
-import { errorMiddleware } from "./middleware/errorMiddleware";
+import { errorMiddleware } from "./middleware/errorMiddleware.js";
 
 // Initialize Express application
 export const app = express();
