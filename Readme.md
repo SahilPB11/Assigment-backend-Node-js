@@ -1,3 +1,17 @@
+**Live Link:** https://backend-assignment-bmjb.onrender.com/
+
+**Postman Documentation:** https://www.getpostman.com/collections/68bca6e1a82614627656
+
+**About the API:**
+
+This is a RESTful API for an e-commerce SKU management system. It allows you to create, read, update, and delete SKUs, as well as manage their inventory.
+
+**Getting Started:**
+
+1. To use the API, you will need a Postman account.
+2. Once you have a Postman account, you can import the Postman collection for the API by following the link above.
+3. Once you have imported the collection, you can start making requests to the API.
+
 # Product Management API
 
 ## Overview
