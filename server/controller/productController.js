@@ -1,4 +1,3 @@
-import Variant from "../Models/Variant.js";
 import Product from "../Models/Product.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
 
@@ -6,18 +5,16 @@ import ErrorHandler from "../utils/ErrorHandler.js";
 export const createProduct = async (req, res, next) => {
   try {
     const { name, description, price, variants } = req.body;
-    const product = new Product({ name, description, price });
-    const savedProduct = await product.save();
 
-    if (variants && variants.length > 0) {
-      for (const variant of variants) {
-        const newVariant = new Variant({ ...variant });
-        savedProduct.variants.push(newVariant);
-        await newVariant.save();
-      }
-      await savedProduct.save();
-    }
-    res.status(201).json({ success: true, data: savedProduct });
+    const product = new Product({
+      name,
+      description,
+      price,
+      variants, // Embed variants directly
+    });
+
+    const savedProduct = await product.save();
+    res.status(201).json(savedProduct);
   } catch (error) {
     next(new ErrorHandler(error.message, 500));
   }
@@ -26,8 +23,23 @@ export const createProduct = async (req, res, next) => {
 // Get all products
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate("variants");
-    res.status(200).json({ success: true, data: savedProduct });
+    const products = await Product.find();
+    res.status(200).json(products);
+  } catch (error) {
+    next(new ErrorHandler(error.message, 500));
+  }
+};
+
+// Retrieve a single product by ID with embedded variants
+export const getProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found." });
+    }
+    res.status(200).json(product);
   } catch (error) {
     next(new ErrorHandler(error.message, 500));
   }
@@ -36,14 +48,15 @@ export const getProducts = async (req, res) => {
 // Update a product by ID
 export const updateProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { name, description, price } = req.body;
-    const product = await Product.findByIdAndUpdate(
-      id,
-      { name, description, price },
-      { new: true }
-    );
-    res.status(200).json({ success: true, data: product });
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found." });
+    }
+    res.status(200).json(product);
   } catch (error) {
     next(new ErrorHandler(error.message, 500));
   }
@@ -52,9 +65,15 @@ export const updateProduct = async (req, res) => {
 // Delete a product by ID
 export const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    await Product.findByIdAndDelete(id);
-    res.status(200).json({ message: "Product deleted successfully" });
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Product not found." });
+    }
+    res
+      .status(200)
+      .json({ success: true, message: "Product deleted successfully." });
   } catch (error) {
     next(new ErrorHandler(error.message, 500));
   }
@@ -63,14 +82,15 @@ export const deleteProduct = async (req, res) => {
 // Search products by name, description, or variant name
 export const searchProducts = async (req, res) => {
   try {
-    const { query } = req.query;
+    const query = req.query.query;
     const products = await Product.find({
       $or: [
-        { name: { $regex: query, $options: "i" } },
-        { description: { $regex: query, $options: "i" } },
+        { name: { $regex: query, $options: "i" } }, // Search by product name
+        { description: { $regex: query, $options: "i" } }, // Search by product description
+        { "variants.name": { $regex: query, $options: "i" } }, // Search by variant name
       ],
-    }).populate("variants");
-    res.status(200).json({ success: true, data: products });
+    });
+    res.status(200).json(products);
   } catch (error) {
     next(new ErrorHandler(error.message, 500));
   }
