@@ -18,6 +18,9 @@ app.use(express.json()); // Parse JSON payloads
 
 // Set up routes for different functionalities
 app.use("/", ProductRoute); // User-related routes
+app.get("/", (req, res) => {
+  res.status(200).json("thanks for coming here ");
+});
 
 // Use error handling middleware to manage and respond to errors
 app.use(errorMiddleware);

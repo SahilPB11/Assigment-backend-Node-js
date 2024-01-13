@@ -82,10 +82,8 @@ export const deleteProduct = async (req, res, next) => {
 // Search products by name, description, or variant name
 export const searchProducts = async (req, res, next) => {
   try {
-    console.log("dokg");
     const query = req.query.query;
     // Log the query for debugging
-    console.log("Search Query:", query);
     // Ensure the query is a valid string before executing the search
     if (typeof query !== "string") {
       return res
@@ -101,7 +99,6 @@ export const searchProducts = async (req, res, next) => {
     });
     res.status(200).json(products);
   } catch (error) {
-    console.log("hii");
     next(new ErrorHandler(error.message, 500));
   }
 };
