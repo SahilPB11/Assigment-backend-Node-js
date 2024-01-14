@@ -1,69 +1,33 @@
-**Live Link:** https://backend-assignment-bmjb.onrender.com/
 
-**Postman Documentation:** [https://documenter.getpostman.com/view/23487917/2s9YsNdVnd)
+ **Live Link:** 🔗 https://backend-assignment-bmjb.onrender.com/
 
-**About the API:**
+**Postman Documentation:** 📚 [https://documenter.getpostman.com/view/23487917/2s9YsNdVnd)
 
-This is a RESTful API for an e-commerce SKU management system. It allows you to create, read, update, and delete SKUs, as well as manage their inventory.
+**About the API:** 💡
 
-**Getting Started:**
+_**Say hello to your new bestie! 🤝 This RESTful API is here to help you manage your e-commerce SKUs like a pro. Create, read, update, delete - you name it, this API's got your back! Oh, and don't forget about managing inventory - it's all here, just waiting for your magic touch.**_
+
+**Getting Started:** 🏃
 
 1. To use the API, you will need a Postman account.
 2. Once you have a Postman account, you can import the Postman collection for the API by following the link above.
 3. Once you have imported the collection, you can start making requests to the API.
 
-# Product Management API
+# Product Management API Overview 🗺️
 
-## Overview
+_**Whether you're a coding ninja 🥷 or a business whizz, this API is your ultimate weapon for managing products and their variations. Create, read, update, and delete products effortlessly. Need to search for specific products? No problem! And the cherry on top? You can retrieve detailed info about each product, including its variants. Now, let's dive into the details.**_
 
-This project provides a comprehensive and user-friendly API for managing products and their variants. It allows users to perform CRUD (Create, Read, Update, Delete) operations on products, search for products based on various criteria, and retrieve detailed information about individual products, including their variants. The API is designed to be easy to use and integrate with front-end applications.
+## CRUD Operations 🛠️
 
-## Getting Started
+CRUD (Create, Read, Update, Delete) operations are essential for managing your products and variants. Here's how you can use them:
 
-To get started, you will need to:
+### 1️⃣ Create Product: 🐣
 
-1. **Install the necessary dependencies**:
+_**Give birth to a new product!**_
 
-   - Node.js and npm
-   - MongoDB
+**URL**: 🌍 `/api/products`
 
-2. **Clone the project repository**:
-
-   ```
-   git clone https://github.com/username/product-management-api.git
-   ```
-
-3. **Set up the database**:
-
-   - Start a MongoDB instance
-   - Create a database named `product-management`
-   - Import the `product-management.json` file into the database
-
-4. **Configure the environment variables**:
-
-   - Copy the `.env.example` file to `.env`
-   - Fill in the database connection string and port number
-
-5. **Install the dependencies**:
-
-   ```
-   npm install
-   ```
-
-6. **Run the server**:
-   ```
-   npm start
-   ```
-
-## API Endpoints
-
-The API provides the following endpoints:
-
-### Create Product
-
-**URL**: `/api/products`
-
-**Method**: POST
+**Method**: 🛠️ POST
 
 **Request Body**:
 
@@ -89,7 +53,7 @@ The API provides the following endpoints:
 }
 ```
 
-**Response**:
+**Response**: 🎁
 
 ```json
 {
@@ -116,13 +80,15 @@ The API provides the following endpoints:
 }
 ```
 
-### Get All Products
+### 2️⃣ Get All Products: 🔎
 
-**URL**: `/api/products`
+_**Time for a product parade!**_
 
-**Method**: GET
+**URL**: 🌍 `/api/products`
 
-**Response**:
+**Method**: 🛠️ GET
+
+**Response**: 🎉
 
 ```json
 [
@@ -152,13 +118,15 @@ The API provides the following endpoints:
 ]
 ```
 
-### Get Product by ID
+### 3️⃣ Get Product by ID: 👀
 
-**URL**: `/api/products/:id`
+_**Spotlight on a single product!**_
 
-**Method**: GET
+**URL**: 🌍 `/api/products/:id`
 
-**Response**:
+**Method**: 🛠️ GET
+
+**Response**: ✨
 
 ```json
 {
@@ -185,13 +153,15 @@ The API provides the following endpoints:
 }
 ```
 
-### Update Product by ID
+### 4️⃣ Update Product by ID: ✏️
 
-**URL**: `/api/products/:id`
+_**Give your product a makeover!**_
 
-**Method**: PUT
+**URL**: 🌍 `/api/products/:id`
 
-**Request Body**:
+**Method**: 🛠️ PUT
+
+**Request Body**: 🎁
 
 ```json
 {
@@ -217,7 +187,7 @@ The API provides the following endpoints:
 }
 ```
 
-**Response**:
+**Response**: 🎁
 
 ```json
 {
@@ -244,13 +214,15 @@ The API provides the following endpoints:
 }
 ```
 
-### Delete Product by ID
+### 5️⃣ Delete Product by ID: 🗑️
 
-**URL**: `/api/products/:id`
+_**Say goodbye to a product!**_
 
-**Method**: DELETE
+**URL**: 🌍 `/api/products/:id`
 
-**Response**:
+**Method**: 🛠️ DELETE
+
+**Response**: 🌟
 
 ```json
 {
@@ -259,17 +231,19 @@ The API provides the following endpoints:
 }
 ```
 
-### Search Products
+## Search Products: 🔍
 
-**URL**: `/api/products/search`
+_**Find the perfect product in a snap!**_
 
-**Method**: GET
+**URL**: 🌍 `/api/products/search`
+
+**Method**: 🛠️ GET
 
 **Query Parameters**:
 
 - `query`: The search term
 
-**Response**:
+**Response**: 🎉
 
 ```json
 [
@@ -280,32 +254,4 @@ The API provides the following endpoints:
     "price": 100,
     "variants": [
       {
-        "_id": "63957d3718a9290561c0a3b5",
-        "name": "Variant 1",
-        "SKU": "SKU123",
-        "additionalCost": 10,
-        "stockCount": 10
-      },
-      {
-        "_id": "63957d3718a9290561c0a3b6",
-        "name": "Variant 2",
-        "SKU": "SKU456",
-        "additionalCost": 20,
-        "stockCount": 20
-      }
-    ]
-  },
-  ...
-]
-```
-
-## Schema
-
-The following schemas are used in the database:
-
-### Product
-
-```json
-{
-  "_id": "63957d3718a
-```
+        "_id": "63957d3718a929056 
